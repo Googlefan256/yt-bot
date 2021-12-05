@@ -1,0 +1,42 @@
+{
+    "plz-join": "please join a voice channel",
+    "you-cannot-eval": "YOU AREN'T THE OWNER",
+    "bot-not-join": "bot isn't in a voice channel",
+    "queue": {
+        "add": "added to queue",
+        "playing": "playing"
+    },
+    "boolean": "please specify by true or false",
+    "cannot-join": "bot cannot join to{channel}",
+    "changed": "changed!",
+    "skip": "skipped!",
+    "leave": "leaved!",
+    "queue-loop-enabled": "queueloop is enabled",
+    "loop-enabled": "loop is enabled",
+    "th-song": "{n}th",
+    "requested-by": "requested by {tag}",
+    "queueask": "{guild}'s queue",
+    "pause": {
+        "already": "already pausing",
+        "not": "nothing is paused"
+    },
+    "paused": "paused",
+    "unpaused": "unpaused",
+    "no-video": "no video found",
+    "add-many": "{n}videos were added to the queue",
+    "activity": "{prefix}help in {n}guilds",
+    "helps": {
+        "help": "shows the help",
+        "play": "plays a music",
+        "loop": "changes if it loops(true/false)",
+        "queueloop": "changes if it loops on the queue(true/false)",
+        "pause": "pause",
+        "unpause": "resumes",
+        "stop": "stops and disconnect",
+        "pl": "add song from a playlist",
+        "skip": "skips a song",
+        "queue": "shows the queue",
+        "np": "shows the song played now"
+    },
+    "disabled-queuemenu": ""
+}

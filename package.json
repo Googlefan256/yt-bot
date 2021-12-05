@@ -1,0 +1,30 @@
+{
+  "name": "yt-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "npm install\nnode src/index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googlefan256/yt-bot.git"
+  },
+  "author": "Googlefan256 <info@glow-bot.com> (https://glow-bot.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/googlefan256/yt-bot/issues"
+  },
+  "homepage": "https://github.com/googlefan256/yt-bot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "@discordjs/voice": "^0.7.5",
+    "chalk": "^5.0.0",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.4.0",
+    "tweetnacl": "^1.0.3",
+    "yt-search": "^2.10.2",
+    "ytdl-core": "^4.9.1"
+  }
+}

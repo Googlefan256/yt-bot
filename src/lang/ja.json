@@ -1,0 +1,42 @@
+{
+    "plz-join": "ボイスチャンネルに接続してください",
+    "you-cannot-eval": "あなたはeval権限を持っていません",
+    "bot-not-join": "botはまだボイスチャンネルに接続していません",
+    "queue": {
+        "add": "queueに追加",
+        "playing": "再生中"
+    },
+    "boolean": "trueかfalseを指定してください",
+    "cannot-join": "{channel}には参加できません",
+    "changed": "変更しました",
+    "skip": "スキップしました!",
+    "leave": "退出しました!",
+    "queue-loop-enabled": "queueloopが有効化されています",
+    "loop-enabled": "loopが有効化されています",
+    "th-song": "{n}曲目",
+    "requested-by": "requested by {tag}",
+    "queueask": "{guild}の queue",
+    "pause": {
+        "already": "既にpauseしています",
+        "not": "pauseされていません"
+    },
+    "paused": "pauseしました",
+    "unpaused": "pauseを解除しました",
+    "no-video": "動画またはプレイリストが見つかりませんでした",
+    "add-many": "{n}件の動画をqueueに追加しました",
+    "activity": "{prefix}help / {n}サーバー",
+    "helps": {
+        "help": "ヘルプを表示します",
+        "play": "音楽を再生します",
+        "loop": "loopの有効&無効を切り替えます(true/false)",
+        "queueloop": "queueLoopの有効&無効を切り替えます(true/false)",
+        "pause": "一時停止します",
+        "unpause": "再開します",
+        "stop": "停止し、退出します",
+        "pl": "プレイリストを追加します",
+        "skip": "音楽をスキップします",
+        "queue": "queueを表示します",
+        "np": "現在再生されている曲を表示します"
+    },
+    "disabled-queuemenu": "このqueueメニューは無効です"
+}
