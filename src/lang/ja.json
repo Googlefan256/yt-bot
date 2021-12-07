@@ -22,7 +22,7 @@
     },
     "paused": "pauseしました",
     "unpaused": "pauseを解除しました",
-    "no-video": "動画またはプレイリストが見つかりませんでした",
+    "no-video": "動画が見つかりませんでした",
     "add-many": "{n}件の動画をqueueに追加しました",
     "activity": "{prefix}help / {n}サーバー",
     "helps": {
@@ -36,7 +36,14 @@
         "pl": "プレイリストを追加します",
         "skip": "音楽をスキップします",
         "queue": "queueを表示します",
-        "np": "現在再生されている曲を表示します"
+        "np": "現在再生されている曲を表示します",
+        "status": "botのステータスを表示します"
     },
-    "disabled-queuemenu": "このqueueメニューは無効です"
+    "disabled-queuemenu": "このqueueメニューは無効です",
+    "status": {
+        "title": "ステータス",
+        "memory": "メモリ",
+        "cpu": "cpu"
+    },
+    "mention": "やぁ!便利な音楽botだよ!\n{prefix}helpからコマンド一覧を見てね!!"
 }

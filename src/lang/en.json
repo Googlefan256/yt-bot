@@ -33,10 +33,17 @@
         "pause": "pause",
         "unpause": "resumes",
         "stop": "stops and disconnect",
-        "pl": "add song from a playlist",
+        "pl": "add songs from a playlist",
         "skip": "skips a song",
         "queue": "shows the queue",
-        "np": "shows the song played now"
+        "np": "shows the song played now",
+        "status": "shows the bot's status"
     },
-    "disabled-queuemenu": ""
+    "disabled-queuemenu": "this queue menu is disabled",
+    "status": {
+        "title": "status",
+        "memory": "memory",
+        "cpu": "cpu"
+    },
+    "mention": "Hello! I'm the music bot.\nPlease type {prefix}help to get a list of commands"
 }

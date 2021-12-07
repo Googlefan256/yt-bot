@@ -1,10 +1,13 @@
-import { Collection, Message, MessageActionRow, MessageButton, MessageEmbed } from "discord.js"
+import { Collection, MessageActionRow, MessageButton, MessageEmbed } from "discord.js"
 const playing = new Collection()
 const queuemenu = new Collection()
 import { createAudioPlayer, joinVoiceChannel, VoiceConnectionStatus, createAudioResource, StreamType, AudioPlayerStatus } from "@discordjs/voice"
 import ytdl from "ytdl-core"
 import yts from "yt-search"
 import {inspect} from "util"
+import {readFileSync} from "fs"
+import {cpus} from "os"
+import sleep from "./utils/sleep.mjs"
 global.queuemenu = queuemenu
 
 class ytConnection{
@@ -47,7 +50,7 @@ class ytConnection{
         const resource = createAudioResource(stream, {
            inputType: StreamType.WebmOpus
         });
-        this.player.play(resource)
+        this.__play_____________(resource)
         this.player.once(AudioPlayerStatus.Idle,()=>{
             if(self.skkiping)return
             if(this.queueLoop && !this.loop)this.queue.push(this.queue[0])
@@ -55,6 +58,13 @@ class ytConnection{
             if(self.queue.length === 0)return self.leave()
             self._basePlay(this.queue[0])
         })
+    }
+    __play_____________(resource){
+        try{
+            this.player.play(resource)
+        }catch{
+            sleep(1000).then(()=>this.__play_____________(resource))
+        }
     }
     skip(){
         this.skkiping = true
@@ -176,7 +186,7 @@ export const queue = {
         const pages = []
         let r = ms
         while(r.length > 0){
-            if(e.footer?.text)pages.push(new MessageEmbed().setFooter(e.footer?.text).setTitle(process.lang["queueask"].replace("{guild}",message.guild.name)).setColor("NAVY").addFields(...r.slice(0,25))).setThumbnail(message.guild.iconURL())
+            if(e.footer?.text)pages.push(new MessageEmbed().setFooter(e.footer?.text).setTitle(process.lang["queueask"].replace("{guild}",message.guild.name)).setColor("NAVY").addFields(...r.slice(0,25)).setThumbnail(message.guild.iconURL()))
             else pages.push(new MessageEmbed().setTitle(process.lang["queueask"].replace("{guild}",message.guild.name)).setColor("NAVY").addFields(...r.slice(0,25)))
             r = r.slice(25)
         }
@@ -271,7 +281,7 @@ export const pl = {
         if(!message.guild.me.voice.channel)playing.set(message.guildId,new ytConnection(message.member.voice.channel))
         const connection = playing.get(message.guildId) || new ytConnection(message.member.voice.channel)
         playing.set(message.guildId,connection)
-        const vs = await ytpl(args[0],message)
+        const vs = await ytpl(args[0] || "",message)
         if(!vs)return message.channel.send(process.lang["no-video"])
         vs.map(a=>connection._play(a))
         return message.reply(process.lang["add-many"].replace("{n}",String(vs.length)))
@@ -328,5 +338,29 @@ export const ev = {
 				message.react("❌");
 				message.reply(`\`\`\`js\n${err}\n\`\`\``)
 			});
+    }
+}
+
+function depends(){
+    const d = JSON.parse(readFileSync("package.json","utf-8")).dependencies
+    const v = Object.values(d)
+    return Object.keys(d).map((a,b)=> a + ": " + v[b].slice(1)).join("\n")
+}
+
+function cpu(){
+    const r = cpus().map(a=>Object.values(a.times)).map(a=>[a[0],a.reduce((b,c)=>b+c)]).reduce((a,b)=>[a[0]+b[0],a[1]+b[1]])
+    return Math.floor(r[0] / r[1] * 10000) / 100 + "%"
+}
+
+export const status = {
+    run: async function(message){
+        message.reply({embeds:[
+            new MessageEmbed()
+                .setColor("NAVY")
+                .setTitle(process.lang["status"]["title"])
+                .addField(process.lang["status"]["memory"],Math.floor(process.memoryUsage.rss()/1024/1024*100)/100+"MB",true)
+                .setDescription(`\`\`\`md\n${depends()}\n\`\`\``)
+                .addField(process.lang["status"]["cpu"],cpu(),true)
+        ]})
     }
 }

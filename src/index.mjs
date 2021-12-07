@@ -56,11 +56,12 @@ client.once("ready",async()=>{
         .then(user=>debug("owner setted to " + chalk.cyan(user.tag) + "(" + chalk.cyan(user.id) +  ")"))
         .catch(()=>error("CANNNOT FIND THE OWNER "+chalk.yellowBright(process.env.OWNER_ID)))
     setInterval(()=>{
-        client.user.setActivity(process.lang["activity"].replace("{n}",String(client.guilds.cache.size).replace("{prefix}",process.env.PREFIX)),{type:"PLAYING"})
+        client.user.setActivity(process.lang["activity"].replace("{n}",String(client.guilds.cache.size)).replace("{prefix}",process.env.PREFIX),{type:"PLAYING"})
     },5000)
 })
 
 client.on("messageCreate",async message=>{
+    if(message.author && !message.author.bot && message.mentions.users.get(client.user.id))return message.reply(process.lang["mention"].replace("{prefix}",process.env.PREFIX))
     if(!message.content || !message.author || message.author.bot || !message.content.startsWith(process.env.PREFIX))return
     const args = message.content.slice(process.env.PREFIX.length).trim().split(/ /g)
     const name = args.shift()
