@@ -10,10 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/googlefan256/yt-bot.git"
   },
-  "author": "Googlefan256 <info@glow-bot.com> (https://glow-bot.com/)",
+  "author": "Googlefan256 (https://glow-bot.com/)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/googlefan256/yt-bot/issues"
+    "url": "https://discord.gg/SZdwmU6tjY"
   },
   "homepage": "https://github.com/googlefan256/yt-bot#readme",
   "dependencies": {
