@@ -2,7 +2,7 @@
  **このbotはセルフホスティングで使うことを想定しています**  
  readme思いつかないのでpr出してくれると嬉しい()
 
-#　使い方
+# 使い方
  envにDISCORD_TOKENとOWNER_ID書き込んでね
  replitなら適当にgit取り込んでスタートボタン押したらできる  
  それ以外ならnodejsとffmpegさえあれば、  
