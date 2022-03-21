@@ -11,7 +11,8 @@ export const raw = {
             name: "number",
             required: true,
             type: "INTEGER",
-            minValue: 1
+            minValue: 1,
+            description: ".."
         }
     ]
 }
@@ -20,7 +21,7 @@ export const exec = async function(i){
     const player = i.client.players.get(i.guildId)
     if(!player)return i.reply({embeds:[new Embed().setAuthor({name: "エラー", iconURL: "attachment://error.png"}).setDescription("このサーバーでこのbotは音楽を再生していません")],files:[new MessageAttachment("./assets/error.png","error.png")]})
     if(!i.member.voice?.channel)return i.reply({embeds:[new Embed().setAuthor({name: "エラー", iconURL: "attachment://error.png"}).setDescription("ボイスチャンネルに参加してください！")],files:[new MessageAttachment("./assets/error.png","error.png")]})
-    const n = i.options.getIntger("number")
+    const n = i.options.getInteger("number")
     const select = player.tracks[n - 1]
     if(!select)return i.reply({embeds:[new Embed().setAuthor({name: "エラー", iconURL: "attachment://error.png"}).setDescription("その番号のトラックが見つかりませんでした！")],files:[new MessageAttachment("./assets/error.png","error.png")]})
     player.tracks = player.tracks.filter((x, i) => i !== n - 1)
