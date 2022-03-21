@@ -1,4 +1,4 @@
-import { createAudioPlayer,joinVoiceChannel,VoiceConnectionStatus,createAudioResource,StreamType,AudioPlayerStatus } from "@discordjs/voice"
+import { createAudioPlayer, joinVoiceChannel, VoiceConnectionStatus, createAudioResource, StreamType, AudioPlayerStatus } from "@discordjs/voice"
 import ytdl from "ytdl-core"
 import { Collection } from "discord.js"
 import { EventEmitter } from "events"

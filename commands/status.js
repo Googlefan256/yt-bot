@@ -1,6 +1,6 @@
 import { Embed } from "../logic/embed.js"
 import { MessageAttachment } from "discord.js"
-import { getCpu, getMemory,getUptime } from "../logic/status.js"
+import { getCpu, getMemory, getUptime } from "../logic/status.js"
 
 export const name = "status"
 

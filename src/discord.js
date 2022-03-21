@@ -7,6 +7,8 @@ import { CommandManager } from "../logic/commandmanager.js"
 
 import { VoiceManager } from "../logic/connection.js"
 
+import { ExtManager } from "../logic/extensions.js"
+
 /*
  * class which extends discordjs/client 
  */
@@ -17,9 +19,11 @@ export const Bot = class Bot extends Client{
         super({intents})
         this.commands = new CommandManager(this)
         this.players = new VoiceManager(this)
+        this.extensions = new ExtManager(this)
     }
     async start(){
         await this.commands.loadAll()
+        await this.extensions.loadAll()
         await this.login()
         this.owners = await new Promise(resolve => this.once("ready", () => resolve(Promise.all(JSON.parse(process.env.OWNER_ID).map(id => this.users.fetch(id))))))
         await this.application.commands.fetch()
