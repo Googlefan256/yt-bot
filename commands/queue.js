@@ -2,7 +2,7 @@ import { Embed } from "../logic/embed.js"
 import { MessageAttachment } from "discord.js"
 
 export const resolveFields = function(f){
-    return f.map((v, i) => [{name:`${i+1}番目`,value:`[${v.title}](${v.url})\n< \`${v.requester}\``}][0])
+    return f.map((v, i) => [{name:`${i+1}番目`,value:`[${v.title}](${v.url})\n> \`${v.requester}\``}][0])
 }
 
 export const name = "queue"

@@ -26,7 +26,7 @@ bot.on("error",console.log)
 bot.on("ready", () => 
     setInterval(() => {
         bot.user.setActivity({name: "/help でコマンド一覧を表示します",type: "STREAMING"})
-        setTimeout(() => bot.user.setActivity({name: `${bot.voice.adapters.size}vc / ${bot.guilds.cache.size}guilds`,type: "STREAMING"}), 5000)
+        setTimeout(() => bot.user.setActivity({name: `${bot.players.size}vc / ${bot.guilds.cache.size}guilds`,type: "STREAMING"}), 5000)
     }, 10000)
 )
 
