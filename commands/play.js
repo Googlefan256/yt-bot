@@ -58,7 +58,7 @@ export const play = async function(i,detail){
         const player = new Player(i.client)
         await player.join(i.member.voice.channel,i.channel)
         player
-            .on("playing",(video) =>  player.loopstate === "none" ?? player.TextChannel.send({embeds:[new Embed().setAuthor({name:video.author.name,iconURL:video.author.avatar}).setTitle(video.title).setURL(video.url).setDescription(video.description).setImage(video.image).setFooter({text:`再生中です | Requested By ${video.requester}`})]}))
+            .on("playing",(video) =>  player.loopstate === "single" && player.TextChannel.send({embeds:[new Embed().setAuthor({name:video.author.name,iconURL:video.author.avatar}).setTitle(video.title).setURL(video.url).setDescription(video.description).setImage(video.image).setFooter({text:`再生中です | Requested By ${video.requester}`})]}))
             .once("end", async() => {
                 await player.destroy()
                 return player.TextChannel.send({embeds:[new Embed().setAuthor({name: "情報", iconURL: "attachment://info.png"}).setDescription("曲がなくなったため、再生を終了しました。")],files: [new MessageAttachment("./assets/info.png","info.png")]})
