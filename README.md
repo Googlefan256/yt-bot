@@ -1,16 +1,13 @@
-# 音楽再生bot
- **このbotはセルフホスティングで使うことを想定しています**  
- readme思いつかないのでpr出してくれると嬉しい()
+# About this
+This is a youtube player for discord
+Discord doesn't like youtube player bots so don't use it on public servers;
 
-# 使い方
- envにDISCORD_TOKENとOWNER_ID書き込んでね
- replitなら適当にgit取り込んでスタートボタン押したらできる  
- それ以外ならnodejsとffmpegさえあれば、  
- ```sh
- npm install
- npm start
- ```  
- の二行でできるよ
+# Usage
+Copy sample.env to .env and fill in the blanks(Or write into your env)
 
-# 質問あれば
- [https://glow-bot.com/support](https://glow-bot.com/support) か issue からどうぞ
+# More questions?
+Contact me from `contact@googlefan.net` or my twitter account
+
+# todo
+commands/
+lib/manager

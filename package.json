@@ -1,34 +1,41 @@
 {
   "name": "yt-bot",
-  "version": "2.3.1",
-  "description": "",
-  "main": "index.mjs",
-  "type": "module",
+  "version": "3.0.0-alpha.0.0.1",
+  "description": "Youtube bot for discord",
+  "type": "commonjs",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "dev": "NODE_ENV=development ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/googlefan256/yt-bot.git"
   },
-  "author": "Googlefan256 (https://glow-bot.com/)",
-  "license": "ISC",
+  "author": "Googlefan256 (https://googlefan.net/)",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/googlefan256/yt-bot/issues"
   },
   "homepage": "https://github.com/googlefan256/yt-bot#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.5.3",
-    "@discordjs/voice": "^0.7.5",
-    "discord.js": "^13.6.0",
-    "dotenv": "^10.0.0",
-    "ffmpeg-static": "^4.4.1",
-    "node-fetch": "^3.2.3",
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.13.0",
+    "chalk": "4.1.2",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "ffmpeg-static": "^5.1.0",
     "tweetnacl": "^1.0.3",
-    "yt-search": "^2.10.2",
-    "ytdl-core": "^4.11.0"
+    "yt-search": "^2.10.3",
+    "ytdl-core": "^4.11.2"
   },
   "devDependencies": {
-    "node": "^16.6.2"
+    "@types/yt-search": "^2.3.2",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
