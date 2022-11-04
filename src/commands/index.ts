@@ -10,6 +10,7 @@ import Volume from "./volume";
 import Search from "./search";
 import Status from "./status";
 import Delete from "./delete";
+import Shuffle from "./shuffle";
 
 export default [
   Play,
@@ -24,4 +25,5 @@ export default [
   Search,
   Status,
   Delete,
+  Shuffle,
 ];

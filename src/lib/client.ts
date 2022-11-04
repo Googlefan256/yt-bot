@@ -21,7 +21,16 @@ export class Bot extends Client {
       )
     );
     if (!this.application) return logger.panic("Application not found");
-    this.application.commands.set(this.command.map((c) => c.raw));
+    await this.application.commands.fetch();
+    await Promise.all(
+      this.command.map((c) => {
+        const m = this.application?.commands.cache.find(
+          (d) => d.name === c.raw.name && d.description === c.raw.description
+        );
+        if (m) return m.edit(c.raw);
+        else return this.application?.commands.create(c.raw);
+      })
+    );
     return null;
   }
 }
