@@ -42,7 +42,7 @@ export interface Video extends VideoSearchResult {
 
 export class Voice extends EventEmitter {
   loopstate = PlayerLoopState.None;
-  volume = 1;
+  volume = 0.5;
   player: AudioPlayer;
   tracks: Array<Video>;
   guildId: Snowflake;
@@ -160,12 +160,12 @@ export class Voice extends EventEmitter {
         format.audioCodec === "opus" && format.container === "webm",
       highWaterMark: 32 * 32 * 32 * 32 * 32,
     });
-    this.playResource(
-      createAudioResource(stream, {
-        inputType: StreamType.WebmOpus,
-        inlineVolume: true,
-      })
-    );
+    const resource = createAudioResource(stream, {
+      inputType: StreamType.WebmOpus,
+      inlineVolume: true,
+    });
+    resource.volume?.setVolume(this.volume);
+    this.playResource(resource);
   }
   private async playResource(resource: AudioResource) {
     try {
