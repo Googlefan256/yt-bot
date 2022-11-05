@@ -1,22 +1,19 @@
 import type { Logger } from "./logger";
 import { execSync, spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { env } from "./env";
 
 export function autoUpdate(logger: Logger) {
-  const VERSION: string = JSON.parse(
-    readFileSync("./package.json", "utf-8")
-  ).version;
   const HEAD = execSync("git rev-parse HEAD").toString().trim();
   if (process.env.UPDATE_STATUS === "restarted") {
     logger.info("Updated!");
-    return logger.info(`Running on head ${HEAD}, version ${VERSION}...`);
+    return logger.info(`Running on head ${HEAD}, version ${env.Version}...`);
   }
   logger.info("Checking for updates...");
   try {
     const r = execSync("git pull").toString().trim();
     if (r === "Already up to date.") {
       logger.info("Already up to date.");
-      return logger.info(`Running on head ${HEAD}, version ${VERSION}...`);
+      return logger.info(`Running on head ${HEAD}, version ${env.Version}...`);
     } else {
       logger.info("Updating dependencies...");
       execSync("npm install");
