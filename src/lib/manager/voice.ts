@@ -158,7 +158,6 @@ export class Voice extends EventEmitter {
     const stream = ytdl(id, {
       filter: (format) =>
         format.audioCodec === "opus" && format.container === "webm",
-      quality: "highest",
       highWaterMark: 32 * 32 * 32 * 32 * 32,
     });
     this.playResource(

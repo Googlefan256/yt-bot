@@ -5,7 +5,7 @@ function format(msg: any) {
   return typeof msg === "string" ? msg : inspect(msg);
 }
 
-class Logger {
+export class Logger {
   constructor() {}
   info(msg: any) {
     console.log(chalk.greenBright("INFO: ") + format(msg));

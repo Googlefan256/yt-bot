@@ -1,5 +1,8 @@
 import { ActivityType } from "discord.js";
-import { Bot, env, logger } from "./lib";
+import { Bot, env, logger, autoUpdate } from "./lib";
+import { createServer } from "node:http";
+
+autoUpdate(logger);
 
 const bot = new Bot();
 bot.start();
@@ -36,6 +39,15 @@ bot.once("ready", () => {
       5000
     );
   }, 10000);
+  if (process.env.REPL_ID) {
+    logger.info("Seems to be running on repl.it");
+    logger.info("Starting web server...");
+    createServer((_, res) => {
+      res.writeHead(200);
+      res.end("ok");
+    });
+    logger.info("Web server started");
+  }
 });
 
 bot.once("ready", () => {
