@@ -31,9 +31,10 @@ export default {
           .setDescription("ステータスを取得しました。")
           .addFields(
             { name: "cpu使用率", value: `${cpu}%`, inline: true },
+
             {
-              name: "メモリ使用量",
-              value: `プロセス: ${memory.process}MB,全体: ${memory.all}MB,合計メモリ: ${memory.total}MB`,
+              name: "WebSocket速度",
+              value: `${i.client.ws.ping}ms`,
               inline: true,
             },
             {
@@ -42,16 +43,16 @@ export default {
               inline: true,
             },
             {
+              name: "メモリ使用量",
+              value: `プロセス: ${memory.process}MB,全体: ${memory.all}MB,合計メモリ: ${memory.total}MB`,
+              inline: false,
+            },
+            {
               name: "起動時間",
               value: `プロセス: ${formatTime(
                 uptime.process
               )},サーバー: ${formatTime(uptime.all)}`,
-              inline: true,
-            },
-            {
-              name: "WebSocket速度",
-              value: `${i.client.ws.ping}ms`,
-              inline: true,
+              inline: false,
             }
           ),
       ],
