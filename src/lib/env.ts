@@ -6,7 +6,9 @@ import { readFileSync } from "fs";
 config();
 
 if (!process.env.DISCORD_TOKEN) logger.panic("DISCORD_TOKEN is not defined");
-const Owners = (process.env.OWNER_ID || "").split(",").filter(x => x.length > 0);
+const Owners = (process.env.OWNER_ID || "")
+  .split(",")
+  .filter((x) => x.length > 0);
 
 export const env = {
   Color:

@@ -227,6 +227,7 @@ export class Voice extends EventEmitter {
     if (!next) {
       return this.destroy(PlayerDestroyReason.Empty);
     }
+    this.current = next;
     return this.play(next);
   }
   setVolume(volume: number) {
