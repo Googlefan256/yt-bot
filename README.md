@@ -8,6 +8,5 @@ Copy sample.env to .env and fill in the blanks(Or write into your env)
 # More questions?
 Contact me from `contact@googlefan.net` or my twitter account
 
-# todo
-commands/
-lib/manager
+# Todo
+再生リストからの再生
