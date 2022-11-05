@@ -11,6 +11,7 @@ import Search from "./search";
 import Status from "./status";
 import Delete from "./delete";
 import Shuffle from "./shuffle";
+import Update from "./update";
 
 export default [
   Play,
@@ -26,4 +27,5 @@ export default [
   Status,
   Delete,
   Shuffle,
+  Update,
 ];
