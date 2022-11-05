@@ -31,7 +31,16 @@ export default {
           .setDescription("ステータスを取得しました。")
           .addFields(
             { name: "cpu使用率", value: `${cpu}%`, inline: true },
-
+            {
+              name: "プロセスid",
+              value: `${process.pid}`,
+              inline: true,
+            },
+            {
+              name: "OS",
+              value: `${process.platform}-${process.arch}`,
+              inline: true,
+            },
             {
               name: "WebSocket速度",
               value: `${i.client.ws.ping}ms`,
@@ -40,6 +49,11 @@ export default {
             {
               name: "接続vc数",
               value: (i.client as Bot).player.size + "vc",
+              inline: true,
+            },
+            {
+              name: "参加サーバー数",
+              value: i.client.guilds.cache.size + "サーバー",
               inline: true,
             },
             {
