@@ -23,7 +23,7 @@ export default {
         ],
       });
     } else {
-      await i.editReply({
+      await i.reply({
         embeds: [
           new EmbedBuilder()
             .setTitle("情報")
