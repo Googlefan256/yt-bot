@@ -45,8 +45,9 @@ bot.once("ready", () => {
     createServer((_, res) => {
       res.writeHead(200);
       res.end("ok");
+    }).listen(Number(process.env.PORT) || 8080, () => {
+      logger.info("Web server started");
     });
-    logger.info("Web server started");
   }
 });
 
