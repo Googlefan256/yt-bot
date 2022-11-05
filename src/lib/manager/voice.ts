@@ -42,7 +42,7 @@ export interface Video extends VideoSearchResult {
 
 export class Voice extends EventEmitter {
   loopstate = PlayerLoopState.None;
-  volume = 0.5;
+  volume = 0.2;
   player: AudioPlayer;
   tracks: Array<Video>;
   guildId: Snowflake;

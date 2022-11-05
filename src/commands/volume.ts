@@ -21,11 +21,11 @@ export default {
         embeds: [
           new EmbedBuilder()
             .setTitle("情報")
-            .setDescription(`現在の音量は${player.volume * 200}です`),
+            .setDescription(`現在の音量は${player.volume * 500}です`),
         ],
       });
     }
-    player.setVolume(volume / 200);
+    player.setVolume(volume / 500);
     return i.reply({
       embeds: [
         new EmbedBuilder()
