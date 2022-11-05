@@ -12,6 +12,8 @@ import Status from "./status";
 import Delete from "./delete";
 import Shuffle from "./shuffle";
 import Update from "./update";
+import Stop from "./stop";
+import Restart from "./restart";
 
 export default [
   Play,
@@ -28,4 +30,6 @@ export default [
   Delete,
   Shuffle,
   Update,
+  Stop,
+  Restart,
 ];
