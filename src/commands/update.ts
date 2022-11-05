@@ -24,13 +24,6 @@ export default {
         ],
       });
     } else {
-      await i.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle("情報")
-            .setDescription("アップデートを開始します"),
-        ],
-      });
       await i.editReply({
         embeds: [
           new EmbedBuilder()
@@ -46,29 +39,11 @@ export default {
           new EmbedBuilder()
             .setTitle("情報")
             .setDescription(
-              "アップデートを開始します\n依存関係をインストールします\n依存関係のインストールが完了しました"
-            ),
-        ],
-      });
-      await i.editReply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle("情報")
-            .setDescription(
               "アップデートを開始します\n依存関係をインストールします\n依存関係のインストールが完了しました\nスクリプトをビルドします"
             ),
         ],
       });
       updater.build();
-      await i.editReply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle("情報")
-            .setDescription(
-              "アップデートを開始します\n依存関係をインストールします\n依存関係のインストールが完了しました\nスクリプトをビルドします\nスクリプトのビルドが完了しました"
-            ),
-        ],
-      });
       await i.editReply({
         embeds: [
           new EmbedBuilder()
