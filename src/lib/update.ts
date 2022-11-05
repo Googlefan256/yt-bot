@@ -30,6 +30,9 @@ export class Updater {
     });
     process.exit(0);
   }
+  exit() {
+    process.exit(0);
+  }
 }
 
 export function autoUpdate(logger: Logger) {

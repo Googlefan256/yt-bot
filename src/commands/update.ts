@@ -1,5 +1,4 @@
-import { type CommandOptions, env, EmbedBuilder } from "../lib";
-import { Updater } from "../lib/update";
+import { type CommandOptions, env, EmbedBuilder, Updater } from "../lib";
 
 export default {
   name: "update",
