@@ -8,6 +8,11 @@ export const search = (q: string) =>
     .then((v) => v.videos.slice(0, 5))
     .catch(() => []);
 
+export const searchPlaylist = (q: string) =>
+  yts(q)
+    .then((v) => v.playlists.slice(0, 5))
+    .catch(() => []);
+
 export const Embedlize = (q: string) =>
   search(q).then((results) => {
     if (!results.length)

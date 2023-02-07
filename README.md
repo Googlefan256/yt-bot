@@ -10,3 +10,4 @@ Contact me from `contact@googlefan.net` or my twitter account
 
 # Todo
 再生リストからの再生
+- refactorfor ncc

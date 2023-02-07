@@ -14,6 +14,7 @@ import Shuffle from "./shuffle";
 import Update from "./update";
 import Stop from "./stop";
 import Restart from "./restart";
+import Playlist from "./playlist";
 
 export default [
   Play,
@@ -32,4 +33,5 @@ export default [
   Update,
   Stop,
   Restart,
+  Playlist,
 ];

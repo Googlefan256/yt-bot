@@ -22,7 +22,7 @@ import {
   entersState,
 } from "@discordjs/voice";
 import ytdl from "ytdl-core";
-import { VideoSearchResult } from "yt-search";
+import { PlaylistMetadataResult, VideoSearchResult } from "yt-search";
 
 export enum PlayerLoopState {
   None,
@@ -40,11 +40,15 @@ export interface Video extends VideoSearchResult {
   requester: Snowflake;
 }
 
+export interface Playlist extends PlaylistMetadataResult{
+  requester: Snowflake;
+}
+
 export class Voice extends EventEmitter {
   loopstate = PlayerLoopState.None;
   volume = 0.2;
   player: AudioPlayer;
-  tracks: Array<Video>;
+  tracks: Video[];
   guildId: Snowflake;
   connection: VoiceConnection;
   current?: Video;
@@ -124,6 +128,24 @@ export class Voice extends EventEmitter {
     };
     return i?.reply ? i.reply(payload) : this.tchannel.send(payload);
   }
+  onQueueAddPlaylist(list: Playlist, i?: ChatInputCommandInteraction) {
+    const payload = {
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("プレイリストをキューに追加しました")
+          .setDescription(`**${list.videos.length}**件追加しました。`),
+      ],
+      components: [
+        new ActionRowBuilder<ButtonBuilder>().addComponents(
+          new LinkButtonBuilder()
+            .setLabel("YouTube")
+            .setURL(list.url)
+            .setEmoji("🔗")
+        ),
+      ]
+    };
+    return i?.reply ? i.reply(payload) : this.tchannel.send(payload);
+  }
   onDisconnect(i?: ChatInputCommandInteraction) {
     const payload = {
       embeds: [
@@ -184,6 +206,35 @@ export class Voice extends EventEmitter {
     } else {
       this.tracks.push(video);
       return this.onQueueAdd(video, i);
+    }
+  }
+  async addList(list: Playlist, i?: ChatInputCommandInteraction) {
+    const videos = list.videos.map((v) => ({
+      ...v,
+      requester: list.requester,
+      type: "video" as const,
+      url: `https://www.youtube.com/watch?v=${v.videoId}`,
+      views: 0,
+      ago: "null",
+      duration: {
+        seconds: 0,
+        timestamp: "null",
+        toString: () => "null",
+      },
+      seconds: 0,
+      thumbnail: "https://test.org/image",
+      image: "https://test.org/image",
+      description: "null",
+      timestamp: "null",
+    }));
+    if (this.player.state.status === AudioPlayerStatus.Idle) {
+      this.current = videos[0];
+      this.tracks = videos.slice(1);
+      this.play(videos[0]);
+      return this.onPlaying(videos[0], i);
+    } else {
+      this.tracks.push(...videos);
+      return this.onQueueAddPlaylist(list, i);
     }
   }
   async play(video: Video) {
