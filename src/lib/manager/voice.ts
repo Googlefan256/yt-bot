@@ -288,7 +288,7 @@ export class Voice extends EventEmitter {
     }
   }
   shuffle() {
-    this.tracks = this.tracks.sort(() => Math.random() / 2);
+    this.tracks = this.tracks.sort(() => Math.random() - 0.5);
   }
   pause(i: ChatInputCommandInteraction) {
     if (this.player.pause()) {
