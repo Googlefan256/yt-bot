@@ -24,7 +24,7 @@ export default {
         ephemeral: true,
       });
     } else {
-      player.tracks = player.tracks.splice(index - 1, 1);
+      player.tracks = player.tracks.filter((_, i) => i !== index);
       return i.reply({
         embeds: [
           new EmbedBuilder()
