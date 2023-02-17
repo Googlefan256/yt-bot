@@ -176,7 +176,7 @@ export class Voice extends EventEmitter {
     };
     return i?.reply ? i.reply(payload) : this.tchannel.send(payload);
   }
-  private async stream(id: string) {
+  private stream(id: string) {
     const stream = ytdl(id, {
       filter: (format) =>
         format.audioCodec === "opus" && format.container === "webm",
@@ -187,7 +187,7 @@ export class Voice extends EventEmitter {
       inlineVolume: true,
     });
     resource.volume?.setVolume(this.volume);
-    this.playResource(resource);
+    return this.playResource(resource);
   }
   private async playResource(resource: AudioResource) {
     try {
@@ -238,8 +238,8 @@ export class Voice extends EventEmitter {
     }
   }
   async play(video: Video) {
-    this.stream(video.videoId);
-    this.player.once(AudioPlayerStatus.Idle, () => {
+    await this.stream(video.videoId);
+    this.player.once(AudioPlayerStatus.Idle, async () => {
       this.current = undefined;
       if (this.loopstate === PlayerLoopState.Current)
         this.tracks.unshift(video);
@@ -251,6 +251,7 @@ export class Voice extends EventEmitter {
       }
       this.current = next;
       this.onPlaying(next);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       return this.play(next);
     });
   }
