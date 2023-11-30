@@ -1,50 +1,50 @@
 {
-  "name": "yt-bot",
-  "version": "3.0.0-alpha.0.0.3",
-  "description": "Youtube bot for discord",
-  "type": "commonjs",
-  "scripts": {
-    "start": "node dist/index.js",
-    "build": "ncc build src/index.ts -o dist && terser dist/index.js -o dist/index.js && terser dist/502.index.js -o dist/502.index.js",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "dev": "NODE_ENV=development ts-node src/index.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/googlefan256/yt-bot.git"
-  },
-  "author": "Googlefan256 (https://googlefan.net/)",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/googlefan256/yt-bot/issues"
-  },
-  "homepage": "https://github.com/googlefan256/yt-bot#readme",
-  "dependencies": {
-    "@discordjs/opus": "^0.9.0",
-    "@discordjs/voice": "^0.14.0",
-    "chalk": "4.1.2",
-    "discord.js": "^14.6.0",
-    "dotenv": "^16.0.3",
-    "ffmpeg-static": "^5.1.0",
-    "opusscript": "^0.0.8",
-    "tweetnacl": "^1.0.3",
-    "yt-search": "^2.10.3",
-    "ytdl-core": "^4.11.2"
-  },
-  "devDependencies": {
-    "@types/yt-search": "^2.3.2",
-    "@vercel/ncc": "^0.36.0",
-    "prettier": "^2.7.1",
-    "terser": "^5.16.1",
-    "typescript": "^4.8.4"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    "name": "yt-bot",
+    "version": "4.0.0-alpha-1",
+    "description": "Youtube bot for discord",
+    "type": "commonjs",
+    "scripts": {
+        "start": "node dist/index.js",
+        "build": "rimraf dist && tsc",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "dev": "cross-env NODE_ENV=development ts-node src/index.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/googlefan256/yt-bot.git"
+    },
+    "author": "Googlefan256 (https://googlefan.net/)",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/googlefan256/yt-bot/issues"
+    },
+    "homepage": "https://github.com/googlefan256/yt-bot#readme",
+    "devDependencies": {
+        "@types/yt-search": "^2.10.3",
+        "cross-env": "^7.0.3",
+        "prettier": "^3.1.0",
+        "rimraf": "^5.0.5",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.3.2"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "licenses": [
+        {
+            "type": "Apache-2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    ],
+    "dependencies": {
+        "@discordjs/voice": "^0.16.1",
+        "chalk": "^4.1.2",
+        "discord.js": "^14.14.1",
+        "dotenv": "^16.3.1",
+        "ffmpeg-static": "^5.2.0",
+        "opusscript": "^0.0.8",
+        "tweetnacl": "^1.0.3",
+        "yt-search": "^2.10.4",
+        "ytdl-core": "^4.11.5"
     }
-  ]
 }

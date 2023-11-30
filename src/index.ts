@@ -1,60 +1,26 @@
-import { ActivityType } from "discord.js";
-import { Bot, env, logger, autoUpdate } from "./lib";
-import { createServer } from "node:http";
+import { Events } from "discord.js";
+import { bot } from "./client";
+import { onMessage, onReady } from "./event";
+import { error } from "./logger";
 
-autoUpdate(logger);
-
-const bot = new Bot();
-bot.start();
-
-bot.on("interactionCreate", async (i) => {
-  if (i.isChatInputCommand()) {
-    const cmd = bot.command.get(i.commandName);
-    if (!cmd) return;
+bot.once(Events.ClientReady, () => onReady(bot));
+bot.on(Events.MessageCreate, async (message) => {
+    if (!message.inGuild()) return;
     try {
-      await cmd.exec(i);
-    } catch (error) {
-      logger.error(error);
-      await i.reply(
-        "An error occured while executing this command.\nPlease try again later."
-      );
+        await onMessage(message);
+    } catch (e) {
+        error(e);
     }
-  }
 });
 
-bot.on("error", logger.error);
+(async () => {
+    await bot.start();
+})();
 
-bot.once("ready", () => {
-  setInterval(() => {
-    bot.user?.setActivity({
-      name: "/help for help",
-      type: ActivityType.Streaming,
-    });
-    setTimeout(
-      () =>
-        bot.user?.setActivity({
-          name: `${bot.player.size}vc / Version ${env.Version}`,
-          type: ActivityType.Streaming,
-        }),
-      5000
-    );
-  }, 10000);
-  if (process.env.REPL_ID) {
-    logger.info("Seems to be running on repl.it");
-    logger.info("Starting web server...");
-    createServer((_, res) => {
-      res.writeHead(200);
-      res.end("ok");
-    }).listen(Number(process.env.PORT) || 8080, () => {
-      logger.info("Web server started");
-    });
-  }
+process.on("uncaughtException", (e) => {
+    error(e);
 });
 
-bot.once("ready", () => {
-  logger.info(`Logged in as ${bot.user?.tag}!`);
+process.on("unhandledRejection", (e) => {
+    error(e);
 });
-
-process.on("uncaughtException", logger.error);
-
-process.on("unhandledRejection", logger.error);
