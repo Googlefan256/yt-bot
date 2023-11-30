@@ -11,6 +11,9 @@ jobs:
         steps:
             - name: checkout
               uses: actions/checkout@v3
+            - name: Lowercase the repo owner
+              run: |
+                  echo ::set-env name=IMAGE::${GITHUB_REPOSITORY_OWNER}/${IMAGE_NAME}
             - name: Set up QEMU
               uses: docker/setup-qemu-action@v2
             - name: Set up Docker Buildx
@@ -30,5 +33,5 @@ jobs:
                   context: .
                   push: true
                   tags: |
-                      ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
-                      ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+                      ghcr.io/${{ env.IMAGE }}:latest
+                      ghcr.io/${{ env.IMAGE }}:${{ github.sha }}
