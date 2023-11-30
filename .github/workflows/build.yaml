@@ -8,6 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             IMAGE_NAME: yt-bot
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         steps:
             - name: checkout
               uses: actions/checkout@v3
