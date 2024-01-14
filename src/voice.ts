@@ -4,9 +4,14 @@ import {
     AudioPlayer,
     AudioPlayerState,
 } from "@discordjs/voice";
-import { Collection, GuildChannel, GuildTextBasedChannel } from "discord.js";
+import {
+    Collection,
+    GuildChannel,
+    GuildTextBasedChannel,
+    escapeInlineCode,
+} from "discord.js";
 import { Video, dl } from "./yt";
-import { info } from "./logger";
+import { error, info } from "./logger";
 
 export class Player {
     private playing = false;
@@ -21,11 +26,13 @@ export class Player {
         this.queue.push(options);
         if (!this.playing) {
             this.playing = true;
-            await this.channel.send(`再生します。`);
+            await this.channel.send(
+                `[${options.title}](<https://youtube.com/watch?v=${options.id}>)を再生します。`,
+            );
             this.play();
         } else {
             await this.channel.send(
-                `キューに追加しました。(${this.queue.length}曲目)`,
+                `[${options.title}](<https://youtube.com/watch?v=${options.id}>)をキューに追加しました。(${this.queue.length}曲目)`,
             );
         }
     }
@@ -57,13 +64,13 @@ export class Player {
                 : this.queue.shift()!;
         try {
             await this.channel.send(
-                `再生します。(${
-                    this.looping && !this.queuelooping
-                        ? this.queue.length
-                        : this.queue.length + 1
-                }曲残っています。)`,
+                `${escapeInlineCode(options.title)}を再生します。(${
+                    this.looping ?? this.queuelooping
+                        ? "ループ中"
+                        : `${this.queue.length}曲残っています`
+                })`,
             );
-            const stream = dl(options);
+            const stream = await dl(options.id);
             this.player.play(stream);
             const listener = (
                 state: AudioPlayerState,
@@ -79,6 +86,11 @@ export class Player {
                 }
             };
             this.player.on("stateChange", listener);
+            this.player.on("error", (e) => {
+                error(e);
+                this.player.off("stateChange", listener);
+                this.play();
+            });
         } catch (e) {
             console.error(e);
             this.play();

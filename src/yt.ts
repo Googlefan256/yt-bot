@@ -1,14 +1,28 @@
 import { createAudioResource } from "@discordjs/voice";
 import { search } from "yt-search";
+import { stream } from "play-dl";
 import { validateID } from "ytdl-core";
-import ytdl from "ytdl-core";
 
-export function dl(q: Video) {
-    const video = ytdl(q.id, {
-        quality: "highestaudio",
-        filter: "audioonly",
+export async function dl(q: string) {
+    const video = await stream(q, {
+        discordPlayerCompatibility: true,
     });
-    return createAudioResource(video);
+    return createAudioResource(video.stream);
+}
+
+export async function fetchPlaylist(id: string) {
+    try {
+        const { videos } = await search({ listId: id });
+        return videos.map((v) => ({
+            title: v.title,
+            description: v.title,
+            id: v.videoId,
+            image: v.thumbnail || "",
+            footer: `${v.duration.timestamp}`,
+        }));
+    } catch (e) {
+        return null;
+    }
 }
 
 export async function ys(query: string) {

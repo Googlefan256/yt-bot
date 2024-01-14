@@ -1,6 +1,6 @@
 {
     "name": "yt-bot",
-    "version": "4.0.0-alpha-1",
+    "version": "4.0.0-alpha-2",
     "description": "Youtube bot for discord",
     "type": "commonjs",
     "scripts": {
@@ -43,6 +43,7 @@
         "dotenv": "^16.3.1",
         "ffmpeg-static": "^5.2.0",
         "opusscript": "^0.0.8",
+        "play-dl": "^1.9.7",
         "tweetnacl": "^1.0.3",
         "yt-search": "^2.10.4",
         "ytdl-core": "^4.11.5"

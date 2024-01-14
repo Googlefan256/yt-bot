@@ -1,5 +1,5 @@
 import { GuildTextBasedChannel, Message } from "discord.js";
-import { ys } from "./yt";
+import { fetchPlaylist, ys } from "./yt";
 import { connect, disconnect, get } from "./voice";
 import { Embed } from "./embed";
 
@@ -19,6 +19,11 @@ export const commands: Command[] = [
         name: "play",
         alias: [],
         run: play,
+    },
+    {
+        name: "playlist",
+        alias: ["pl"],
+        run: playlist,
     },
     {
         name: "join",
@@ -89,8 +94,8 @@ async function queue(message: Message<true>, args: string[]) {
     }
     const desc = player.queue.map((q, i) => {
         return {
-            name: `[${q.title}](https://youtube.com/watch?v=${q.id})`,
-            value: q.description,
+            name: q.title,
+            value: `${q.description}[Source](https://youtube.com/watch?v=${q.id})`,
         };
     });
     await message.reply({
@@ -207,6 +212,10 @@ async function help(message: Message<true>, args: string[]) {
                         value: "音楽を再生します。",
                     },
                     {
+                        name: "playlist",
+                        value: "プレイリストを再生します。",
+                    },
+                    {
                         name: "join",
                         value: "ボイスチャンネルに接続します。",
                     },
@@ -265,4 +274,30 @@ async function play(message: Message<true>, args: string[]) {
         return;
     }
     await player.push(yt);
+}
+
+async function playlist(message: Message<true>, args: string[]) {
+    if (!message.member?.voice.channelId) {
+        return;
+    }
+    const { player } = get(message.guildId!);
+    if (!player) return;
+    const arg = args.join(" ");
+    if (!arg) {
+        await message.reply("再生する内容が必須です。");
+        return;
+    }
+    const yt = await ys(arg);
+    if (!yt) {
+        await message.reply("見つかりませんでした。");
+        return;
+    }
+    const pl = await fetchPlaylist(yt.id);
+    if (!pl) {
+        await message.reply("見つかりませんでした。");
+        return;
+    }
+    for (const video of pl) {
+        await player.push(video);
+    }
 }
