@@ -8,5 +8,5 @@ FROM node:slim
 WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./package.json
-RUN npm install --omit=dev
+RUN npm install -g pnpm && pnpm install -P
 CMD ["node", "dist/index.js"]
