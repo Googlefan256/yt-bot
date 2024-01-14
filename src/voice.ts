@@ -93,6 +93,12 @@ export class Player {
             );
             const stream = await dl(options.id);
             this.player.play(stream);
+            const onError = (e: any) => {
+                error(e);
+                this.player.off("stateChange", listener);
+                this.player.off("error", onError);
+                this.play();
+            };
             const listener = (
                 state: AudioPlayerState,
                 newState: AudioPlayerState,
@@ -100,6 +106,7 @@ export class Player {
                 if (state.status === "playing" && newState.status === "idle") {
                     info(`Finished playing ${options.title}.`);
                     this.player.off("stateChange", listener);
+                    this.player.off("error", onError);
                     if (this.queuelooping) {
                         this.queue.push(options);
                     }
@@ -107,11 +114,7 @@ export class Player {
                 }
             };
             this.player.on("stateChange", listener);
-            this.player.on("error", (e) => {
-                error(e);
-                this.player.off("stateChange", listener);
-                this.play();
-            });
+            this.player.on("error", onError);
         } catch (e) {
             console.error(e);
             this.play();
