@@ -2,6 +2,7 @@ import { createAudioResource } from "@discordjs/voice";
 import { search } from "yt-search";
 import { stream } from "play-dl";
 import { validateID } from "ytdl-core";
+import { info } from "./logger";
 
 export async function dl(q: string) {
     const video = await stream(q, {

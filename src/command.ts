@@ -287,17 +287,13 @@ async function playlist(message: Message<true>, args: string[]) {
         await message.reply("再生する内容が必須です。");
         return;
     }
-    const yt = await ys(arg);
-    if (!yt) {
-        await message.reply("見つかりませんでした。");
-        return;
-    }
-    const pl = await fetchPlaylist(yt.id);
+    const pl = await fetchPlaylist(arg);
     if (!pl) {
         await message.reply("見つかりませんでした。");
         return;
     }
     for (const video of pl) {
-        await player.push(video);
+        await player.push(video, true);
     }
+    await message.reply(`プレイリストから${pl.length}曲追加しました。`);
 }

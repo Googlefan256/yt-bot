@@ -22,7 +22,7 @@ export class Player {
         public queue: Video[] = [],
         public channel: GuildTextBasedChannel,
     ) {}
-    async push(options: Video) {
+    async push(options: Video, playlist: boolean = false) {
         this.queue.push(options);
         if (!this.playing) {
             this.playing = true;
@@ -31,6 +31,7 @@ export class Player {
             );
             this.play();
         } else {
+            if (playlist) return;
             await this.channel.send(
                 `[${options.title}](<https://youtube.com/watch?v=${options.id}>)をキューに追加しました。(${this.queue.length}曲目)`,
             );
