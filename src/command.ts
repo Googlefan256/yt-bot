@@ -36,6 +36,11 @@ export const commands: Command[] = [
         run: skip,
     },
     {
+        name: "shuffle",
+        alias: [],
+        run: shuffle,
+    },
+    {
         name: "pause",
         alias: [],
         run: pause,
@@ -142,7 +147,7 @@ async function skip(message: Message<true>, args: string[]) {
     }
     const { player } = get(message.guildId!);
     if (!player) return;
-    player.skip();
+    await player.skip();
 }
 
 async function pause(message: Message<true>, args: string[]) {
@@ -151,7 +156,7 @@ async function pause(message: Message<true>, args: string[]) {
     }
     const { player } = get(message.guildId!);
     if (!player) return;
-    player.pause();
+    await player.pause();
 }
 
 async function resume(message: Message<true>, args: string[]) {
@@ -160,7 +165,7 @@ async function resume(message: Message<true>, args: string[]) {
     }
     const { player } = get(message.guildId!);
     if (!player) return;
-    player.resume();
+    await player.resume();
 }
 
 async function stop(message: Message<true>, args: string[]) {
@@ -169,7 +174,7 @@ async function stop(message: Message<true>, args: string[]) {
     }
     const { player } = get(message.guildId!);
     if (!player) return;
-    player.clear();
+    await player.clear();
 }
 
 async function loop(message: Message<true>, args: string[]) {
@@ -222,6 +227,10 @@ async function help(message: Message<true>, args: string[]) {
                     {
                         name: "skip",
                         value: "再生中の音楽をスキップします。",
+                    },
+                    {
+                        name: "shuffle",
+                        value: "キューをシャッフルします。",
                     },
                     {
                         name: "pause",
@@ -296,4 +305,13 @@ async function playlist(message: Message<true>, args: string[]) {
         await player.push(video, true);
     }
     await message.reply(`プレイリストから${pl.length}曲追加しました。`);
+}
+
+async function shuffle(message: Message<true>, args: string[]) {
+    if (!message.member?.voice.channelId) {
+        return;
+    }
+    const { player } = get(message.guildId!);
+    if (!player) return;
+    await player.shuffle();
 }

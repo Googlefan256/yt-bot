@@ -12,6 +12,22 @@ import {
 } from "discord.js";
 import { Video, dl } from "./yt";
 import { error, info } from "./logger";
+function shuffle<T>(arr: T[]) {
+    arr = arr.slice();
+    let i = arr.length;
+    let j = 0;
+    let temp: T;
+    if (i === 0) {
+        return arr;
+    }
+    while (--i) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    return arr;
+}
 
 export class Player {
     private playing = false;
@@ -53,6 +69,10 @@ export class Player {
         this.queue = [];
         this.player.stop();
         await this.channel.send("停止しました。");
+    }
+    async shuffle() {
+        this.queue = shuffle(this.queue);
+        await this.channel.send("シャッフルしました。");
     }
     async play() {
         if (!this.queue.length) {
