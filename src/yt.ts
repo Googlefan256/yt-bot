@@ -12,6 +12,7 @@ export async function dl(q: string) {
 
 export async function fetchPlaylist(id: string) {
     try {
+        id = URL.canParse(id) ? new URL(id).searchParams.get("list") || id : id;
         const { videos } = await search({ listId: id });
         return videos.map((v) => ({
             title: v.title,
